@@ -3,19 +3,22 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'google', 'prettier'],
+  extends: ["plugin:react/recommended", "google", "prettier"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
     ecmaVersion: 13,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['react'],
+  plugins: ["react"],
   settings: {
     react: {
-      version: 'latest',
+      version: "latest",
     },
   },
-  rules: {},
-};
+  rules: {
+    "require-jsdoc": "off",
+    "react/prop-types": "off",
+  },
+}
