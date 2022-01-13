@@ -28,7 +28,7 @@ export const Home = () => {
 
   return (
     <>
-      <section className="w-full h-full grid grid-cols-12 relative">
+      <section className="w-full h-screen grid grid-cols-12 relative">
         <div className="col-span-3 flex justify-end items-end h-full py-[75px]">
           <div className="w-max flex flex-col gap-2">
             <span className="text-3xl font-semibold">Find your issue !</span>
