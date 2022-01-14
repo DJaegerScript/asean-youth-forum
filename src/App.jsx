@@ -1,7 +1,16 @@
 import React from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Navbar, Footer } from "./components"
-import { Home, Activities, About, Archive, Profile } from "./pages"
+import {
+  Home,
+  Activities,
+  About,
+  Archive,
+  Profile,
+  Issue,
+  Category,
+  Blog,
+} from "./pages"
 
 function App() {
   return (
@@ -13,6 +22,9 @@ function App() {
         <Route path="/about" element={<About />} exact />
         <Route path="/archive" element={<Archive />} exact />
         <Route path="/profile" element={<Profile />} exact />
+        <Route path="/issue" element={<Issue />} exact />
+        <Route path="/issue/:category" element={<Category />} exact />
+        <Route path="/issue/:category/:id" element={<Blog />} exact />
       </Routes>
       <Footer />
     </Router>
