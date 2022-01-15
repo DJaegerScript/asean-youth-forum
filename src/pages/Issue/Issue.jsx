@@ -1,33 +1,18 @@
-import React from "react"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
 import { v4 as uuid } from "uuid"
 
 export const Issue = () => {
-  const cardData = [
-    { imageUrl: "social.jpg", label: "Social", url: "issue/social" },
-    { imageUrl: "economy.jpg", label: "Economy", url: "issue/economy" },
-    {
-      imageUrl: "human_right.jpg",
-      label: "Human Right",
-      url: "issue/human-right",
-    },
-    { imageUrl: "culture.jpg", label: "Culture", url: "issue/culture" },
-    { imageUrl: "health.jpg", label: "Health", url: "issue/health" },
-    { imageUrl: "education.jpg", label: "Education", url: "issue/education" },
-    { imageUrl: "law.jpg", label: "Law", url: "issue/law" },
-    { imageUrl: "military.jpg", label: "Military", url: "issue/military" },
-    { imageUrl: "crime.jpg", label: "Crime", url: "issue/crime" },
-    { imageUrl: "sport.jpg", label: "Sport", url: "issue/sport" },
-    {
-      imageUrl: "automotive.jpg",
-      label: "Automotive",
-      url: "issue/automotive",
-    },
-    {
-      imageUrl: "environment.jpg",
-      label: "Environment",
-      url: "issue/environment",
-    },
-  ]
+  const [issues, setIssues] = useState([])
+
+  useEffect(() => {
+    const getIssues = async () => {
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/issue`)
+      setIssues(data)
+    }
+
+    getIssues()
+  }, [])
 
   return (
     <section className="w-full h-max flex flex-col justify-center items-center py-32">
@@ -51,9 +36,9 @@ export const Issue = () => {
         </div>
       </div>
       <div className="w-full flex flex-wrap px-24 gap-28 justify-center">
-        {cardData.map(({ imageUrl, label, url }) => (
+        {issues.map(({ imageUrl, label, categoryId }) => (
           <a
-            href={url}
+            href={`/issue/${categoryId}`}
             key={uuid()}
             className="relative flex flex-col w-max h-max"
           >
