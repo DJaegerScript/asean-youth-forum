@@ -23,8 +23,8 @@ function App() {
         <Route path="/archive" element={<Archive />} exact />
         <Route path="/profile" element={<Profile />} exact />
         <Route path="/issue" element={<Issue />} exact />
-        <Route path="/issue/:category" element={<Category />} exact />
         <Route path="/issue/:category/:id" element={<Blog />} exact />
+        <Route path="/issue/:category" element={<Category />} exact />
       </Routes>
       <Footer />
     </Router>
