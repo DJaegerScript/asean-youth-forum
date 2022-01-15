@@ -1,6 +1,6 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 import { Eye } from "../../../components"
 
@@ -54,8 +54,8 @@ export const Category = () => {
         <div className="w-full flex">
           <div className="w-4/6 p-12 gap-14 flex flex-col ">
             {trendings.map(({ imageUrl, title, description }, index) => (
-              <a
-                href={`/issue/${category}/1`}
+              <Link
+                to={`/issue/${category}/1`}
                 key={uuid()}
                 className={`flex gap-2 w-[900px] bg-[#F4F4F4] ${
                   index % 2 !== 0 && "flex-row-reverse"
@@ -66,12 +66,12 @@ export const Category = () => {
                   <h1 className="font-bold text-4xl">{title}</h1>
                   <p className="font-light text-2xl">
                     {description}
-                    <a className="text-slate-300 border-b-2 border-slate-300">
+                    <span className="text-slate-300 border-b-2 border-slate-300">
                       Lihat Selengkapnya
-                    </a>
+                    </span>
                   </p>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
           <div className="w-2/6 flex flex-col gap-5 p-12">

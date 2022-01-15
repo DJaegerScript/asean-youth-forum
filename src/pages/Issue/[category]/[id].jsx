@@ -1,6 +1,9 @@
 import React from "react"
+import { useLocation } from "react-router-dom"
 
 export const Blog = () => {
+  const location = useLocation()
+  console.log(location)
   return (
     <>
       <section className="w-full h-max flex flex-col justify-center items-center py-40 px-32">
@@ -15,7 +18,10 @@ export const Blog = () => {
                 ikut naik
               </span>
               <div className="flex flex-col gap-4">
-                <img src="../../economy1.jpg" alt="economy" />
+                <img
+                  src="https://res.cloudinary.com/dohqh8twm/image/upload/v1642214973/economy1_carha7.jpg"
+                  alt="economy"
+                />
                 <span className="font-bold text-lg">
                   Harga daging ayam dan daging sapi di pasar tradisional naik
                   pada awal pekan ini, Senin (6/9). Ilustrasi

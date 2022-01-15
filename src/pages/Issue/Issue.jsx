@@ -1,5 +1,6 @@
 import axios from "axios"
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 
 export const Issue = () => {
@@ -37,8 +38,8 @@ export const Issue = () => {
       </div>
       <div className="w-full flex flex-wrap px-24 gap-28 justify-center">
         {issues.map(({ imageUrl, label, categoryId }) => (
-          <a
-            href={`/issue/${categoryId}`}
+          <Link
+            to={`/issue/${categoryId}`}
             key={uuid()}
             className="relative flex flex-col w-max h-max"
           >
@@ -49,7 +50,7 @@ export const Issue = () => {
                 {label}
               </div>
             </div>
-          </a>
+          </Link>
         ))}
       </div>
     </section>
