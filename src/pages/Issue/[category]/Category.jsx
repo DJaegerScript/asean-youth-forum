@@ -1,62 +1,38 @@
-import React from "react"
+import axios from "axios"
+import React, { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 import { Eye } from "../../../components"
 
 export const Category = () => {
   const location = useLocation()
+
+  const capitalize = word => word.charAt(0).toUpperCase() + word.slice(1)
+
   const category = location.pathname.split("/")[2]
+  const categoryName = category
+    .split("-")
+    .reduce((prev, curr) => capitalize(prev) + " " + capitalize(curr))
 
-  const blogs = [
-    {
-      imageUrl: "../economy1.jpg",
-      title: "Harga Daging Ayam Naik Pada Awal Pekan Ini",
-      description:
-        "Jakarta, Rerata harga daging ayam di pasar tradisional di seluruh Indonesia naik 0,88 persen ke Rp34.250 per Kilogram (Kg) pada awal pekan ini.",
-    },
-    {
-      imageUrl: "../economy3.jpg",
-      title: "Transaksi UMKM dan BUMN, Tembus 10,9 T Lewat PaDi",
-      description:
-        "Jakarta,  Menteri Badan Usaha Milik Negara (BUMN) Erick Thohir mengatakan nilai transaksi yang dihasilkan antara Usaha Mikro, Kecil, dan Menengah.",
-    },
-    {
-      imageUrl: "../economy2.jpg",
-      title: "Pendaftaran Kartu Prakerja Gelombang 20 Di Umumkan Pekan Ini",
-      description:
-        "Jakarta, CNN Indonesia -- Manajemen Kartu Prakerja (PMO) akan membuka kembali program Kartu Prakerja bagi 800 ribu orang pada gelombang ke-20.",
-    },
-  ]
+  const [trendings, setTrendings] = useState([])
+  const [populars, setPopulars] = useState([])
 
-  const populars = [
-    {
-      imageUrl: "../popular1.jpg",
-      title: "Rupiah Gagah Ke 14.222 Akibat Data Ekonomi AS",
-      viewers: "2.876",
-    },
-    {
-      imageUrl: "../popular2.jpg",
-      title: "Uang Kripto Kompak Menghijau, Bitcoin-Dogecoin Paling Segar",
-      viewers: "2.098",
-    },
-    {
-      imageUrl: "../popular3.jpg",
-      title: "Leasing Bisa Sita Baramg Kredit Tanpa Pengadlilan",
-      viewers: "2.021",
-    },
-    {
-      imageUrl: "../popular4.jpg",
-      title: "IHSG Macet Pada Hari Ini, 6 September",
-      viewers: "1.902",
-    },
-  ]
+  useEffect(() => {
+    const getCategories = async category => {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/category/${category}`
+      )
+      setTrendings(data.trendingTopics)
+      setPopulars(data.popularTopics)
+    }
+    getCategories(category)
+  }, [])
+
   return (
     <section className="w-full h-max flex flex-col justify-center items-center py-20">
       <div className="w-full px-12 py-12 flex">
         <div className="w-2/3 flex items-center">
-          <h1 className="font-bold text-5xl">
-            {category.charAt(0).toUpperCase() + category.slice(1)}
-          </h1>
+          <h1 className="font-bold text-5xl">{categoryName}</h1>
         </div>
         <div className="w-1/3 flex justify-center items-center">
           <div className="w-max absolute">
@@ -77,7 +53,7 @@ export const Category = () => {
       <div className="w-full flex flex-col">
         <div className="w-full flex">
           <div className="w-4/6 p-12 gap-14 flex flex-col ">
-            {blogs.map(({ imageUrl, title, description }, index) => (
+            {trendings.map(({ imageUrl, title, description }, index) => (
               <a
                 href={`/issue/${category}/1`}
                 key={uuid()}
