@@ -9,7 +9,11 @@ import "swiper/css/pagination"
 SwiperCore.use([Navigation])
 
 export const Activities = () => {
-  const activities = ["activity2.jpg", "activity1.jpg", "activity3.jpg"]
+  const activities = [
+    { imageUrl: "activity2.jpg", title: "Webinar" },
+    { imageUrl: "activity1.jpg", title: "Campaign" },
+    { imageUrl: "activity3.jpg", title: "Discussion" },
+  ]
   return (
     <section className="h-screen w-full flex justify-center items-center">
       <div className="flex flex-col w-full gap-12 h-full justify-center items-center">
@@ -23,9 +27,12 @@ export const Activities = () => {
             loopFillGroupWithBlank={true}
             className="w-full"
           >
-            {activities.map(activity => (
+            {activities.map(({ imageUrl, title }) => (
               <SwiperSlide key={uuid()}>
-                <img src={activity} alt="test" className="w-[340px] h-96" />
+                <div className="flex flex-col items-center">
+                  <img src={imageUrl} alt="test" className="w-[340px] h-96" />
+                  <span className="font-bold text-2xl">{title}</span>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
